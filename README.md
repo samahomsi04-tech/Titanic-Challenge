@@ -15,32 +15,31 @@ Kaggle Titanic Dataset Challenge
 
 
 ## Dataset 
-1. The dataset was slightly balance across both classes Bengin and Malignant
-   - A 2,000 sample was taken from Malignant calss to address imbalancd scenario
+- Training dataset
+  - **Training set** : 70%
+  - **Validation set** : 30%
 
-
-2. The dataset is splitted into
-  - **Training set** : 80%
-  - **Validation set** : 10%
-  - **Test set** : 10%
+- Testing dataset
 
 
 ## Data Preprocessing
-- Image resize to 64X64X3,  only for WGAN-base approach 128X128X3
-- Image normalization
+- Feature Engineering
+  - Drop unmeaningful columns such as **Name** and **Passenger**
+  - Drop **Ticket** feature, cuase of the huge virution in feature of more that 400 uniqe categories, the **Pclass** and **Embarked** features will cover the lost of this feature
+  - Drop **Cabin** feature, using fillna with mean or median is not an ideal move, since it creates artificial data hard to rely on. the best move is to drop it
+  - LabelEncoder **Sex** and **Embarked** features
+  - Scale the sets using StandardScaler
 
-- Augmanting traning set
-   - All augmantation approaches were applyed only on training set. Vallidation and testing kept imbalance to mimic real-life scenario 
 
 
-
-## CCN-based classifier Architecture
-  - **Architecture :** Multiple convolutional layers, pooling layers, and a fullyconnected layer. 
-  - **Optimizer :** Adam (learning rate 0.0001)
+## classifier Architecture
+  - **Architecture :** Multiple Dense layers with ReLU and linear activation fnction. 
+  - **Optimizer :** AdamW (learning rate 0.0015)
   - **Loss Function :** Binary Cross-Entropy
 
 
 ## Evaluation and Results
+- Trianing and Validation learning curves
 - Best test accuracy
 - Evaluation Metrics
   - **F1-Score**
